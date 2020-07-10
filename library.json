@@ -1,0 +1,23 @@
+{ 
+  "name": "LedWinker",
+  "keywords": "led, blink, async, control, no delay",
+  "description": "Platform.io (Arduino) library to control state of LED(s) in async manner.",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/geekbrother/LedWinker.git"
+  },
+  "authors":
+  [
+    {
+      "name": "Max Kalashnikov",
+      "email": "geekmaks@gmail.com",
+      "url": "https://github.com/geekbrother",
+      "maintainer": true
+    },
+  ],
+  "dependencies": [],
+  "version": "1.0.0",
+  "frameworks": "arduino",
+  "platforms": "*"
+}
