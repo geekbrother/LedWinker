@@ -1,7 +1,7 @@
 { 
   "name": "LedWinker",
   "keywords": "led, blink, async, control, no delay",
-  "description": "Platform.io (Arduino) library to control state of LED(s) in async manner.",
+  "description": "This is a tiny Platform.io (Arduino) library to control state of LED(s) in async manner. Blink your LED (FAST or SLOW), ON, OFF. Change LED state in simple async manner without delays or blocking the main thread.",
   "repository":
   {
     "type": "git",
@@ -17,7 +17,7 @@
     }
   ],
   "dependencies": [],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "frameworks": "arduino",
   "platforms": "*"
 }
