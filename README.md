@@ -3,7 +3,8 @@
 
 This is a tiny Platform.io (Arduino) library to control state of LED(s) in async manner.
 
-Blink your LED (FAST or SLOW), ON/OFF LED and change LED state async (without any delay) inside global loop functions of your Platform.io or Arduino project.
+Blink your LED (FAST or SLOW), ON, OFF. Change LED state in simple async manner without delays or blocking the main thread.
+
 
 ## Installation:
 TODO
