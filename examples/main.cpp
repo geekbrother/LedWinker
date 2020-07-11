@@ -1,5 +1,12 @@
-// This is sample Arduino / Platform.io program
-// to use LedWinker library
+// LedWinker async LED control library usage example.
+//
+// Example program listen for commands from serial console to control the LED.
+// Available commands: ON, OFF, SLOW, FAST
+//
+// Tested with Platform.io and Arduino
+// Author: Max Kalashnikov
+// Git Repo: https://github.com/geekbrother/LedWinker
+
 #include <Arduino.h>
 #include <LedWinker.hpp>
 
