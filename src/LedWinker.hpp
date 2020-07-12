@@ -13,6 +13,7 @@ class LedWinker
         LedWinker(int GPIO);
         void Wink(winkType TYPE);
         void Loop();
+        winkType GetState();
     private:
         int _GPIO{0};
         winkType _winkType{OFF};

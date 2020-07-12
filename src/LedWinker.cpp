@@ -56,3 +56,8 @@ void LedWinker::checkBlinkTime(int DELAY){
         digitalWrite(_GPIO, _lastState);
     }
 }
+
+// Getter of the current state
+winkType LedWinker::GetState(){
+    return _winkType;
+}
