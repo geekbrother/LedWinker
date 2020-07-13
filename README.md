@@ -26,13 +26,13 @@ You need to pass LED GPIO number as a paramater for constructor (see example bel
 You can initialize as many LEDs as you wish by creating as many instances, they all will work async.
 
 ### States:
-You can change the state of the LED by call `Wink(STATE)` function of the instance. STATE is the ENUM which includes ON, OFF, FAST, SLOW states.
+You can change the state of the LED by call `Wink(STATE)` method of the instance. STATE is the ENUM which includes ON, OFF, FAST, SLOW states.
 Calling function doesn't hang main thread or make any delay. Changing state(s) will be full async.
 
-You can get current state by calling `GetState()` function.
+You can get current state by calling `GetState()` method.
 
 ### Loop:
-To work properly library needs to observe the main loop. Thats why you need to call `Loop()` function of each LedWink instance inside main loop() function of the program (see example below).
+To work properly library needs to observe the main loop. Thats why you need to call `Loop()` method of each LedWink instance inside main loop() function of the program (see example below).
 
 ## Usage example:
 ```cpp
