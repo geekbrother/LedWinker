@@ -19,19 +19,19 @@ void LedWinker::Wink(winkType TYPE){
 void LedWinker::Loop(){
     // Check for type
     switch (_winkType) {
-        case SLOW:
+        case LED_SLOW:
             checkBlinkTime(SLOW_BLINK_DELAY);
             break;
-        case FAST:
+        case LED_FAST:
             checkBlinkTime(FAST_BLINK_DELAY);
             break;
-        case ON:
+        case LED_ON:
             if(_lastState == LOW){
                 _lastState = HIGH;
                 digitalWrite(_GPIO, _lastState);
             };
             break;
-        case OFF:
+        case LED_OFF:
             if(_lastState == HIGH){
                 _lastState = LOW;
                 digitalWrite(_GPIO, _lastState);
