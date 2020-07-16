@@ -38,9 +38,9 @@ void loop() {
     // say what you got:
     Serial.println(incoming);
     // change led state depend on command
-    if (incoming == "ON") winker.Wink(ON); // ON LED
-    if (incoming == "OFF") winker.Wink(OFF); // OFF LED
-    if (incoming == "FAST") winker.Wink(FAST); // Blink Fast
-    if (incoming == "SLOW") winker.Wink(SLOW); // Blink Slow
+    if (incoming == "ON") winker.Wink(LED_ON); // ON LED
+    if (incoming == "OFF") winker.Wink(LED_OFF); // OFF LED
+    if (incoming == "FAST") winker.Wink(LED_FAST); // Blink Fast
+    if (incoming == "SLOW") winker.Wink(LED_SLOW); // Blink Slow
   } 
 }
