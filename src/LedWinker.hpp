@@ -1,3 +1,6 @@
+#ifndef LEDWINKER_H
+#define LEDWINKER_H
+
 #include "Arduino.h"
 
 enum winkType {
@@ -22,3 +25,5 @@ class LedWinker
 
         void checkBlinkTime(int);
 };
+
+#endif
