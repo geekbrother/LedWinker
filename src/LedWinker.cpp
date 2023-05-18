@@ -1,14 +1,14 @@
-#include "Arduino.h"
+#include <Arduino.h>
 #include "LedWinker.hpp"
 
 #define SLOW_BLINK_DELAY 900
 #define FAST_BLINK_DELAY 180
 
-LedWinker::LedWinker(int GPIO){
-    _GPIO = GPIO;
+LedWinker::LedWinker(uint8_t pin): pin(pin)
+{
     // Set to default LOW (off) the LED
-    pinMode(GPIO, OUTPUT);
-    digitalWrite(_GPIO, LOW);
+    pinMode(pin, OUTPUT);
+    digitalWrite(pin, LOW);
 }
 
 void LedWinker::Wink(winkType TYPE){
@@ -28,13 +28,13 @@ void LedWinker::Loop(){
         case LED_ON:
             if(_lastState == LOW){
                 _lastState = HIGH;
-                digitalWrite(_GPIO, _lastState);
+                digitalWrite(pin, _lastState);
             };
             break;
         case LED_OFF:
             if(_lastState == HIGH){
                 _lastState = LOW;
-                digitalWrite(_GPIO, _lastState);
+                digitalWrite(pin, _lastState);
             };
             break;
     };
@@ -53,7 +53,7 @@ void LedWinker::checkBlinkTime(int DELAY){
             _lastState = LOW;
         }
         // set the LED with the ledState of the variable:
-        digitalWrite(_GPIO, _lastState);
+        digitalWrite(pin, _lastState);
     }
 }
 

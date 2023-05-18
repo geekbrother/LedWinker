@@ -1,7 +1,7 @@
 #ifndef LEDWINKER_H
 #define LEDWINKER_H
 
-#include "Arduino.h"
+#include <stdint.h>
 
 enum winkType {
   LED_SLOW,
@@ -13,12 +13,12 @@ enum winkType {
 class LedWinker
 {
     public:
-        LedWinker(int GPIO);
+        LedWinker(uint8_t pin);
         void Wink(winkType TYPE);
         void Loop();
         winkType GetState();
     private:
-        int _GPIO{0};
+        uint8_t pin;
         winkType _winkType{LED_OFF};
         uint8_t _lastState{LOW};
         unsigned long _lastBlinkedTime{0};
