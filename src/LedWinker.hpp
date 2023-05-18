@@ -17,10 +17,11 @@ class LedWinker
         uint8_t pin;
         uint16_t winkSpeed = winkType::LED_OFF;
         bool lastState = false;
+        bool activeHigh;
         unsigned long lastBlinkedTime = 0;
 
     public:
-        LedWinker(uint8_t pin);
+        LedWinker(uint8_t pin, bool activeHigh = true);
         void Loop();
 
         inline bool GetState() const

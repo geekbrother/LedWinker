@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "LedWinker.hpp"
 
-LedWinker::LedWinker(uint8_t pin): pin(pin)
+LedWinker::LedWinker(uint8_t pin, bool activeHigh) : pin(pin), activeHigh(activeHigh)
 {
     // Set to default LOW (off) the LED
     pinMode(pin, OUTPUT);
@@ -11,14 +11,14 @@ LedWinker::LedWinker(uint8_t pin): pin(pin)
 void LedWinker::off()
 {
     this->winkSpeed = winkType::LED_OFF;
-    digitalWrite(pin, LOW);
+    digitalWrite(pin, !(activeHigh ^ LOW));
     lastState = false;
 }
 
 void LedWinker::on()
 {
     this->winkSpeed = winkType::LED_ON;
-    digitalWrite(pin, HIGH);
+    digitalWrite(pin, !(activeHigh ^ HIGH));
     lastState = true;
 }
 
@@ -32,7 +32,7 @@ void LedWinker::Loop()
     if (currentMillis - lastBlinkedTime >= winkSpeed)
     {
         lastBlinkedTime = currentMillis;
-        digitalWrite(pin, !lastState);
+        digitalWrite(pin, !(activeHigh ^ !lastState));
         lastState = !lastState;
     }
 }
