@@ -3,27 +3,42 @@
 
 #include <stdint.h>
 
-enum winkType {
-  LED_SLOW,
-  LED_FAST,
-  LED_ON,
-  LED_OFF
+enum winkType : uint16_t
+{
+  LED_SLOW = 900,
+  LED_FAST = 180,
+  LED_ON = UINT16_MAX,
+  LED_OFF = 0,
 };
 
 class LedWinker
 {
-    public:
-        LedWinker(uint8_t pin);
-        void Wink(winkType TYPE);
-        void Loop();
-        winkType GetState();
     private:
         uint8_t pin;
-        winkType _winkType{LED_OFF};
-        uint8_t _lastState{LOW};
-        unsigned long _lastBlinkedTime{0};
+        uint16_t winkSpeed = winkType::LED_OFF;
+        bool lastState = false;
+        unsigned long lastBlinkedTime = 0;
 
-        void checkBlinkTime(int);
+    public:
+        LedWinker(uint8_t pin);
+        void Loop();
+
+        inline bool GetState() const
+        {
+          return lastState;
+        }
+
+        inline void Wink(uint16_t winkSpeed)
+        {
+          this->winkSpeed = winkSpeed;
+        }
+
+        void off();
+        void on();
+  
+        inline uint16_t getWinkSpeed() const {
+          return winkSpeed;
+        }
 };
 
 #endif
