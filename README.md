@@ -52,6 +52,7 @@ To work properly library needs to observe the main loop. Thats why you need to c
 #define LED_GPIO 13
 // Initialize winker on LED GPIO number
 LedWinker winker(LED_GPIO);
+// LedWinker winker(LED_GPIO, false); // If your LED is Active-Low (Like ESP bultin LED)
 
 // serial incoming message
 String incoming;
@@ -80,6 +81,7 @@ void loop() {
     if (incoming == "OFF") winker.Wink(LED_OFF); // OFF LED
     if (incoming == "FAST") winker.Wink(LED_FAST); // Blink Fast
     if (incoming == "SLOW") winker.Wink(LED_SLOW); // Blink Slow
+    if (incoming == "1200") winker.Wink(1200); // Blink every 1200 ms
   } 
 }
 ```

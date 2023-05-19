@@ -1,63 +1,38 @@
-#include "Arduino.h"
+#include <Arduino.h>
 #include "LedWinker.hpp"
 
-#define SLOW_BLINK_DELAY 900
-#define FAST_BLINK_DELAY 180
-
-LedWinker::LedWinker(int GPIO){
-    _GPIO = GPIO;
+LedWinker::LedWinker(uint8_t pin, bool activeHigh) : pin(pin), activeHigh(activeHigh)
+{
     // Set to default LOW (off) the LED
-    pinMode(GPIO, OUTPUT);
-    digitalWrite(_GPIO, LOW);
+    pinMode(pin, OUTPUT);
+    off();
 }
 
-void LedWinker::Wink(winkType TYPE){
-    // Just a setter
-    _winkType = TYPE;
+void LedWinker::off()
+{
+    this->winkSpeed = winkType::LED_OFF;
+    digitalWrite(pin, !(activeHigh ^ LOW));
+    lastState = false;
 }
 
-void LedWinker::Loop(){
-    // Check for type
-    switch (_winkType) {
-        case LED_SLOW:
-            checkBlinkTime(SLOW_BLINK_DELAY);
-            break;
-        case LED_FAST:
-            checkBlinkTime(FAST_BLINK_DELAY);
-            break;
-        case LED_ON:
-            if(_lastState == LOW){
-                _lastState = HIGH;
-                digitalWrite(_GPIO, _lastState);
-            };
-            break;
-        case LED_OFF:
-            if(_lastState == HIGH){
-                _lastState = LOW;
-                digitalWrite(_GPIO, _lastState);
-            };
-            break;
-    };
+void LedWinker::on()
+{
+    this->winkSpeed = winkType::LED_ON;
+    digitalWrite(pin, !(activeHigh ^ HIGH));
+    lastState = true;
 }
 
-// Check is time to ON or OFF led based on delay
-void LedWinker::checkBlinkTime(int DELAY){
-    const unsigned long currentMillis = millis();
-    if (currentMillis - _lastBlinkedTime >= DELAY) {
-        // save the last time you blinked the LED
-        _lastBlinkedTime = currentMillis;
-        // if the LED is off turn it on and vice-versa:
-        if (_lastState == LOW) {
-            _lastState = HIGH;
-        } else {
-            _lastState = LOW;
-        }
-        // set the LED with the ledState of the variable:
-        digitalWrite(_GPIO, _lastState);
+void LedWinker::Loop()
+{
+    if (winkSpeed == winkType::LED_ON || winkSpeed == winkType::LED_OFF)
+    {
+        return;
     }
-}
-
-// Getter of the current state
-winkType LedWinker::GetState(){
-    return _winkType;
+    const auto currentMillis = millis();
+    if (currentMillis - lastBlinkedTime >= winkSpeed)
+    {
+        lastBlinkedTime = currentMillis;
+        digitalWrite(pin, !(activeHigh ^ !lastState));
+        lastState = !lastState;
+    }
 }
